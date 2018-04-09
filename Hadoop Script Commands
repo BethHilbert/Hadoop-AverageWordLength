@@ -1,0 +1,24 @@
+Scripts to Run MapReduce for Shakespeare AverageWordLength
+
+
+To compile java files into class files located in stubs directory:
+javac -classpath `hadoop classpath `stubs/*.java
+
+To move compiled class files into jar named awlBMH.jar:
+jar cvf awlBMH.jar stubs/*.class
+
+You can't save over old directory in Hadoop. If it exists you must delete first:
+hadoop fs -rm -r wordlengths
+
+To submit jar file to Hadoop cluster. Input directory shakespeare, output directory wordlengths:
+hadoop jar awlBMH.jar stubs.AvgWordLength shakespeare wordlengths
+
+To look file names in newly created hadoop directory:
+hadoop fs -ls wordlengths
+
+To look at output file text in hadoop directory:
+hadoop fs -cat wordlengths/*
+
+
+Note: these commands are run from terminal, 
+within src directory that the stubs directory is located in.
